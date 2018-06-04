@@ -47,6 +47,12 @@ I used R to generate 6 symmetric positive-definite matrices with real-value entr
 I chose the approach of pre-generated matrices as opposed to the idea of generating a new matrix for each experiment, because this way the measurements will be more accurate. I compare the performance of two algorithms on exactly the same input.
 
 \section{Implementation}
+There are two places in the algorithm that can be parallelized:
+
+\begin{itemize}
+\item Inner product
+\item Division by diagonal elements
+\end{itemize}
 
 \lstset {language=C++}
 \begin{lstlisting}

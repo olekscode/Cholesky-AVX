@@ -102,7 +102,6 @@ void* dotprod_avx_wrap(void* args_void) {
     pthread_exit(ret);
 }
 
-// TODO: Remove copy-pasted code
 double dotprod_avx_par(double* a, double* b, int begin, int end) {
     int middle = begin + (end - begin) / 2;
 
