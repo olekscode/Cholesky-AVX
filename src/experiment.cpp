@@ -100,17 +100,19 @@ void run_experiment(method_t method, const char* method_name,
 int main(int argc, char* argv[]) {
     int input_sizes[] = {250, 500, 1000, 2500, 5000, 7500};
     int repeat = 10;
-    int num_methods = 2;
+    int num_methods = 3;
     int num_sizes = 6;
 
     method_t methods[] = {
         &cholesky_banachiewicz,
-        &cholesky_banachiewicz_avx
+        &cholesky_banachiewicz_avx,
+        &cholesky_banachiewicz_super_avx
     };
 
     const char* method_names[] = {
         "CB",
-        "CB_AVX"
+        "CB_AVX",
+        "CB_AVX_S"
     };
 
     for (int i = 0; i < num_methods; ++i) {

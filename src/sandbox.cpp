@@ -2,6 +2,7 @@
 #include <stdlib.h>    // rand, srand
 #include <time.h>      // time
 
+#include "chol.h"
 #include "dotprod.h"
 #include "print.h"
 #include "tictoc.h"
@@ -31,25 +32,27 @@ int main(int argc, char* argv[]) {
 
     srand(time(NULL));
 
-    int n = atoi(argv[1]);
+    // int n = atoi(argv[1]);
 
-    double* a = new double[n];
-    double* b = new double[n];
+    double* a = new double[9];
+    double* b = new double[9];
+    double* c = new double[9];
 
-    fill_rand(a, n);
-    fill_rand(b, n);
+    //fill_rand(a, n);
+    //fill_rand(b, n);
 
-    double res = 0;
+    for (int i = 0; i < 9; ++i) {
+        a[i] = i + 1;
+        b[i] = 3 - i % 3;
+    }
 
-    experiment(&dotprod_par, "Dot product parallel", a, b, n, res);
-    experiment(&dotprod, "Dot product", a, b, n, res);
-    experiment(&dotprod_par, "Dot product parallel", a, b, n, res);
-    experiment(&dotprod, "Dot product", a, b, n, res);
-    experiment(&dotprod_avx, "Dot product AVX", a, b, n, res);
-    experiment(&dotprod_avx_par, "Dot product AVX parallel", a, b, n, res);
-    
-    cout << res << endl;
+    subtr_avx(a, b, c, 9);
 
+    print_head(a, 9);
+    print_head(b, 9);
+    print_head(c, 9);
+
+    delete[] c;
     delete[] b;
     delete[] a;
 

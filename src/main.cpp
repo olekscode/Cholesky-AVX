@@ -124,7 +124,7 @@ int main(int argc, char* argv[]) {
 
     toc(start, "Reading matrix");
 
-    int m = 4;
+    int m = 3;
     double*** Larr = new double**[m];
 
     for (int i = 0; i < m; ++i) {
@@ -146,15 +146,11 @@ int main(int argc, char* argv[]) {
     toc(start, "Cholesky-Banachiewicz");
 
     start = tic();
-    cholesky_banachiewicz_alt(A, Larr[1], n);
-    toc(start, "Cholesky-Banachiewicz");
-
-    start = tic();
-    cholesky_banachiewicz_avx(A, Larr[2], n);
+    cholesky_banachiewicz_avx(A, Larr[1], n);
     toc(start, "AVX Cholesky-Banachiewicz");
 
     start = tic();
-    cholesky_banachiewicz_super_avx(A, Larr[3], n);
+    cholesky_banachiewicz_super_avx(A, Larr[2], n);
     toc(start, "Super AVX Cholesky-Banachiewicz");
 
     double tol = 0.01;
@@ -162,7 +158,6 @@ int main(int argc, char* argv[]) {
     cout << equal_matrices(Larr[0], Larr[1], n, n, tol) << endl;
     cout << equal_matrices(Larr[1], Larr[2], n, n, tol) << endl;
     cout << equal_matrices(Larr[0], Larr[2], n, n, tol) << endl;
-    cout << equal_matrices(Larr[2], Larr[3], n, n, tol) << endl;
 
     print_head(Larr[0], 5, 4);
     print_head(Larr[1], 5, 4);

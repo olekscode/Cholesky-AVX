@@ -10,7 +10,7 @@
 
 \begin{document}
 
-\title{Implementation of Cholesky Factorization using Intel AVX insructions}
+\title{Implementation of Cholesky Factorization using Intel AVX2s insructions}
 
 \author{Oleksandr Zaytsev}
 \affiliation{%
@@ -54,6 +54,9 @@ There are two places in the algorithm that can be parallelized:
 \item Division by diagonal elements
 \end{itemize}
 
+
+\subsection{Dot product}
+
 \lstset {language=C++}
 \begin{lstlisting}
 double sum;
@@ -67,6 +70,10 @@ _mm_store_sd(&sum,
         _mm256_castpd256_pd128(hsum),
         _mm256_castpd256_pd128(hsum)));
 \end{lstlisting}
+
+We start by loading 256-bits (composed of 4 packed double-precision (64-bit) floating-point elements) from array \texttt{a} into ... We do the same for the 4 values from \texttt{b}. Then we perform elementwise multiplication of the two vectors and sum the values of the resulting vector into a scalar.
+
+Intrinsic \texttt{\_mm256\_castpd256\_pd128} is only used for compilation and does not generate any instructions, thus it has zero latency. \texttt{\_mm\_store\_sd} is an SSE2 instruction that stores the lower double-precision floating-point element into memory.
 
 \section{Experimental results}
 
