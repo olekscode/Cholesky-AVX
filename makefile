@@ -10,13 +10,16 @@ BIN=bin
 
 COMMONSRC=$(SRC)/dotprod.cpp $(SRC)/chol.cpp $(SRC)/print.cpp $(SRC)/tictoc.cpp $(SRC)/equal.cpp
 
-all: chol sandbox
+all: chol sandbox experiment
 
 chol:
 	$(CXX) $(COMMONSRC) $(SRC)/main.cpp -o $(BIN)/chol $(CFLAGS) $(AVXFLAGS) $(PTHREADFLAGS)
 
 sandbox:
 	$(CXX) $(COMMONSRC) $(SRC)/sandbox.cpp -o $(BIN)/sandbox $(CFLAGS) $(AVXFLAGS) $(PTHREADFLAGS)
+
+experiment:
+	$(CXX) $(COMMONSRC) $(SRC)/experiment.cpp -o $(BIN)/experiment $(CFLAGS) $(AVXFLAGS) $(PTHREADFLAGS)
 
 .PHONY: clean
 

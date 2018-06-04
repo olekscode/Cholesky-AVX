@@ -65,8 +65,12 @@ double dotprod_avx_step(const double* const a, const double* const b) {
     __m256d apd = _mm256_loadu_pd(&a[0]);
     __m256d bpd = _mm256_loadu_pd(&b[0]);
     __m256d cpd = _mm256_mul_pd(apd, bpd);
-    __m256d hsum = _mm256_add_pd(cpd, _mm256_permute2f128_pd(cpd, cpd, 0x1));
-    _mm_store_sd(&sum, _mm_hadd_pd(_mm256_castpd256_pd128(hsum), _mm256_castpd256_pd128(hsum)));
+    __m256d hsum = _mm256_add_pd(cpd,
+        _mm256_permute2f128_pd(cpd, cpd, 0x1));
+    _mm_store_sd(&sum,
+        _mm_hadd_pd(
+            _mm256_castpd256_pd128(hsum),
+            _mm256_castpd256_pd128(hsum)));
     return sum;
 }
 

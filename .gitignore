@@ -4,3 +4,9 @@ bin/*
 !bin/.gitkeep
 data/*.dat
 data/*.csv
+!data/experiment_results.csv
+report/*
+!report/*.tex
+!report/*.bib
+!report/*.pdf
+!report/img

@@ -11,6 +11,6 @@ using namespace std;
 #define CLOCK_T chrono::time_point<chrono::high_resolution_clock>
 
 CLOCK_T tic();
-void toc(CLOCK_T start, const char* name);
+double toc(CLOCK_T start, const char* name);
 
 #endif // TICTOC_H
