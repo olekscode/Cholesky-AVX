@@ -1,0 +1,6 @@
+.DS_Store/
+papers/
+bin/*
+!bin/.gitkeep
+data/*.dat
+data/*.csv
